@@ -7,15 +7,44 @@
 
     <script>
 
+    //var console = {};
+    //console.log = function(logmich){
+    //}
+
     window.onload = function(){
-      
+      /**
+       * H1 clickbar machen
+       */
         var h1 = document.getElementsByTagName('h1')[0];
-        
         h1.onclick =   function(){     
           alert(this.innerHTML);
-  
-          
         }
+        
+        /**
+         * Menü Infos anzeigen
+         */
+        
+      var liTags = document.getElementById('menue').getElementsByTagName('li');
+      var aTag;
+        
+        for(var i = 0; i < liTags.length; i++){
+          
+        aTag = liTags[i].getElementsByTagName('a')[0];
+        
+        aTag.onmouseover= function(){
+          document.getElementById('info').innerHTML = this.rel;
+        }
+        
+        aTag.onmouseout = function(){
+          document.getElementById('info').innerHTML = '';
+        }
+        
+        
+          console.log(i);
+          console.log(liTags[i]);
+        }
+        
+        
         
     }
    
@@ -25,6 +54,17 @@
 
   <body>
     <h1>Herzlich Willkommen!</h1>
+    
+    
+    <ul id ="menue">
+      <li> <a href="" rel="Meine Startseite">Home</a> </li>
+      <li> <a href="" rel="So wie ich bin">Über mich</a> </li>
+      <li> <a href="" rel="gibt es keine">Meine Urlaube</a> </li>
+      <li> <a href="" rel="auweh!">Party</a> </li>
+      <li> <a href="" rel="bitte trag' dich ein">Gästebuch</a> </li>
+    </ul>
+    
+    <p id="info"></p>
     
     
 

@@ -6,47 +6,61 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <script>
-
+    // Objekt console erzeugen und Funktion log zuweisen, damit IE keine Probleme macht.
     //var console = {};
-    //console.log = function(logmich){
-    //}
-
-    window.onload = function(){
-      /**
-       * H1 clickbar machen
-       */
+    //console.log = function(logmich){}
+    
+      
+  /**
+   * Wenn Dokument geladen wurde
+   */
+      
+      window.onload = function(){
+        
+    /**
+     * H1 clickbar machen
+     */
+        
+        // h1 selektieren und auf variable legen
         var h1 = document.getElementsByTagName('h1')[0];
+        
+        // onclick mit funktion belegen
         h1.onclick =   function(){     
           alert(this.innerHTML);
-        }
+        } // !onclick
         
-        /**
-         * Menü Infos anzeigen
-         */
         
-      var liTags = document.getElementById('menue').getElementsByTagName('li');
-      var aTag;
+    /**
+     * Menü Infos anzeigen
+     */
         
+        var liTags = document.getElementById('menue').getElementsByTagName('li');
+        var aTag;
+        
+        // Alle LI-Tags durchlaufen
         for(var i = 0; i < liTags.length; i++){
           
-        aTag = liTags[i].getElementsByTagName('a')[0];
-        
-        aTag.onmouseover= function(){
-          document.getElementById('info').innerHTML = this.rel;
-        }
-        
-        aTag.onmouseout = function(){
-          document.getElementById('info').innerHTML = '';
-        }
-        
-        
+          // Link auf die Variable aTag legen, damit nur einmal selektiert werden muss  
+          aTag = liTags[i].getElementsByTagName('a')[0];
+          
+          // mouseover dem jeweiligen Link zuweisen
+          aTag.onmouseover= function(){
+            document.getElementById('info').innerHTML = this.rel;
+          } // !onmouseover
+          
+          // mouseout dem jeweiligen Link zuweisen
+          aTag.onmouseout = function(){
+            document.getElementById('info').innerHTML = '';
+          } // !onmouseout
+          
+          // Zählervariable und LI Tags ausgeben
           console.log(i);
           console.log(liTags[i]);
-        }
+        } // !for
         
         
         
-    }
+      } // !onload
    
 
     </script>
@@ -54,7 +68,6 @@
 
   <body>
     <h1>Herzlich Willkommen!</h1>
-    
     
     <ul id ="menue">
       <li> <a href="" rel="Meine Startseite">Home</a> </li>

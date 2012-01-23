@@ -10,20 +10,25 @@
         return document.querySelectorAll(SELECTOR);
       }
         
-      
       window.onload = function(){
         
-
         var pTags = $('p');
         var h2Tags = $('h2');
-        
 
         for(var i = 0; i < pTags.length; i++){
           pTags[i].original = pTags[i].innerHTML;
+          pTags[i].shortText = true;
           pTags[i].innerHTML = pTags[i].innerHTML.slice(0,20) + '<a href="#">...</a>';
           
           pTags[i].onclick = function(){
-            this.innerHTML = this.original;
+            if(this.shortText == true){
+              this.innerHTML = this.original;
+               this.shortText = false;
+            }else{
+              this.innerHTML = this.innerHTML.slice(0,20) + '<a href="#">...</a>';
+              this.shortText = true;
+            }
+            
           }
         }
         

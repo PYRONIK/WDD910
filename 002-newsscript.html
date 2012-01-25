@@ -6,36 +6,53 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script>
       
+      /**
+       * Selektiert mithilfe von querySelectorAll und gibt die Elemente zurück
+       * 
+       * @param SELECTOR
+       * @return Array HTMLElements
+       */
       var $ = function(SELECTOR){
         return document.querySelectorAll(SELECTOR);
       }
         
-      window.onload = function(){
         
+      window.onload = function(){
+      
+      
+        // Alle pTags und h2Tags selektieren
         var pTags = $('p');
         var h2Tags = $('h2');
+        
+        console.log(pTags);
 
+         
+        /* alle P-Tags durchlaufen */
         for(var i = 0; i < pTags.length; i++){
+          
+          // Text kürzen
           pTags[i].original = pTags[i].innerHTML;
           pTags[i].shortText = true;
           pTags[i].innerHTML = pTags[i].innerHTML.slice(0,20) + '<a href="#">...</a>';
           
+          
+          // Wenn auf p-Tag geklickt wird
           pTags[i].onclick = function(){
             if(this.shortText == true){
-              this.innerHTML = this.original;
-               this.shortText = false;
+              this.innerHTML = this.original + '<a href="#">weniger</a>';
+              this.shortText = false;
             }else{
               this.innerHTML = this.innerHTML.slice(0,20) + '<a href="#">...</a>';
               this.shortText = true;
             }
             
-          }
-        }
+          } // !onclickclick
+        } // !for
         
         
 
 
-      }
+      } // !onload
       
       
 
@@ -47,18 +64,18 @@
 
   <body>
 
-    
+
     <h2 onclick="jetztPassiertEtwas()">Headline</h2>
     <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
 
     <h2>Headline</h2>
     <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
-    
+
     <h2>Headline</h2>
     <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
-    
+
     <h2>Headline</h2>
     <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
-    
+
   </body>
 </html>

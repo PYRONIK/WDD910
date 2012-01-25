@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <script>
+      window.onload = function(){
+        
+        
+        document.getElementById('form').onsubmit = function(){
+          var select = document.getElementById('giveaway');
+          
+          
+          alert(select.getElementsByTagName('option')[select.selectedIndex].innerHTML);
+          
+          select.selectedIndex = 2;
+          
+          return false;
+        }
+        
+        
+        document.getElementById('giveaway').onchange = function(){
+          
+          alert(this.value);
+          
+        }
+        
+        
+      }
+      
+    </script>
+
+  </head>
+
+  <body>
+
+    <form id="form">
+      <fieldset>
+        
+        <select id="giveaway">
+          <option value="13">Jägermeister</option>
+          <option value="15">Vodka</option>
+          <option value="?">Wasser</option>
+          
+        </select>
+        
+        
+      </fieldset>
+      
+      
+      <input type="submit" />
+    </form>
+    
+  </body>
+</html>

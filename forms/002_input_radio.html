@@ -8,10 +8,19 @@
     <script>
       window.onload = function(){
         
+      var radios = radiogroup.getElementsByTagName('input');
+      
+      
+          for(var i = 0; i < radios.length; i++){
+            radios[i].onchange = function(){
+              document.getElementsByTagName('body')[0].style.backgroundColor = this.value;
+            }
+          }
+        
+        
         document.getElementById('form').onsubmit = function(){
           
           var radiogroup = document.getElementById('radiogroup');
-          var radios = radiogroup.getElementsByTagName('input');
           var radioVal;
          
           for(var i = 0; i < radios.length; i++){
@@ -19,21 +28,24 @@
             if(radios[i].checked){
               radioVal = radios[i].value;
             }
-            
-            radios[i].sagWas = function(){
-              alert(this.value);
-            }
-            
-            
-            
-            
+  
           }
+          
+          
+
+          
           
         document.getElementsByTagName('body')[0].style.backgroundColor = radioVal;
           console.log(radioVal);
           
           
-          radios[2].sagWas();
+          
+          // radios[2].checked = true;
+          
+          
+          
+          
+          
           
           return false;
           
@@ -41,7 +53,15 @@
 
         
         
-      }
+          
+          
+        
+          
+        }
+
+        
+        
+      
       
     </script>
     

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+    <script>
+      
+      //var console = {}
+      //console.log = function(L){}
+      
+      window.onload=function(){
+        var field = document.getElementById('inputtext');
+        var form = document.getElementById('form');
+        
+        field.onfocus = function(){
+          console.log('focus');
+        }
+        
+        field.onblur = function(){
+          console.log('blur');
+        }
+        
+        field.onchange = function(){
+          console.log('onchange');
+        }
+        
+        field.onclick = function(){
+          console.log('click');
+        }
+        
+        
+        form.onsubmit = function(){
+          console.log(field.value);
+          
+          field.style.border = '1px solid green';
+          
+          field.value = 'alles erledigt';
+          
+          return false;
+          
+        }
+        
+      }
+      
+    </script>
+    
+  </head>
+
+  <body>
+    
+    
+    <form id="form">
+      <fieldset>
+        
+        <input type="text" value="" id="inputtext" />
+        
+        <input type="submit" />
+      </fieldset>
+      
+    </form>
+
+  </body>
+</html>

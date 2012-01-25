@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script>
+      window.onload = function(){
+        
+        document.getElementById('form').onsubmit = function(){
+          
+          var radiogroup = document.getElementById('radiogroup');
+          var radios = radiogroup.getElementsByTagName('input');
+          var radioVal;
+         
+          for(var i = 0; i < radios.length; i++){
+            
+            if(radios[i].checked){
+              radioVal = radios[i].value;
+            }
+            
+            radios[i].sagWas = function(){
+              alert(this.value);
+            }
+            
+            
+            
+            
+          }
+          
+        document.getElementsByTagName('body')[0].style.backgroundColor = radioVal;
+          console.log(radioVal);
+          
+          
+          radios[2].sagWas();
+          
+          return false;
+          
+        }
+
+        
+        
+      }
+      
+    </script>
+    
+  </head>
+
+  <body>
+
+    <form id="form"> 
+      
+      <fieldset id="radiogroup">
+        Blau <input type="radio" name="farbe" value="blue" /> <br />
+        Grün <input type="radio" name="farbe" value="green" /><br />
+        Gelb <input type="radio" name="farbe" value="yellow" /><br />
+       
+      </fieldset>
+      
+      <input type="submit" />
+      
+    </form>
+    
+  </body>
+</html>

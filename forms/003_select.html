@@ -10,11 +10,13 @@
         
         
         document.getElementById('form').onsubmit = function(){
+          
           var select = document.getElementById('giveaway');
           
-          
+          /* innerHTML der gewählten Option ausgeben */
           alert(select.getElementsByTagName('option')[select.selectedIndex].innerHTML);
           
+          /* index 2 der Selectbox wählen */
           select.selectedIndex = 2;
           
           return false;
@@ -23,6 +25,7 @@
         
         document.getElementById('giveaway').onchange = function(){
           
+          /* Ausgabe des values der Selectbox wenn diese verändert wird */
           alert(this.value);
           
         }

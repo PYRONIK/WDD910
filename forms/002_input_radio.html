@@ -8,60 +8,46 @@
     <script>
       window.onload = function(){
         
-      var radios = radiogroup.getElementsByTagName('input');
-      
-      
-          for(var i = 0; i < radios.length; i++){
-            radios[i].onchange = function(){
-              document.getElementsByTagName('body')[0].style.backgroundColor = this.value;
-            }
+        var radios = radiogroup.getElementsByTagName('input');
+        
+        /* alles Radios durchlaufen und mit Eventhandler belegen */
+        for(var i = 0; i < radios.length; i++){
+          radios[i].onchange = function(){
+            document.getElementsByTagName('body')[0].style.backgroundColor = this.value;
           }
+        } // !for
         
         
+        /**
+         *  Bei onsubmit wird der Wertder "radiogroup" ermittelt, indem die
+         *  radios durchlaufen werden und überprüft wird bei welchen element das
+         *  Attribut checked == true ist.
+         */
         document.getElementById('form').onsubmit = function(){
           
           var radiogroup = document.getElementById('radiogroup');
           var radioVal;
-         
+          
           for(var i = 0; i < radios.length; i++){
             
+            // Überprüfung ob element selektiert ist.
             if(radios[i].checked){
               radioVal = radios[i].value;
             }
-  
+            
           }
           
-          
-
-          
-          
-        document.getElementsByTagName('body')[0].style.backgroundColor = radioVal;
+          // Body-Background denWert des aktiven Radiobuttons zuweisen
+          document.getElementsByTagName('body')[0].style.backgroundColor = radioVal;
           console.log(radioVal);
           
-          
-          
           // radios[2].checked = true;
-          
-          
-          
-          
-          
-          
-          return false;
-          
-        }
 
+          return false;    
+        } // !onsubmit
         
         
-          
-          
-        
-          
-        }
-
-        
-        
-      
+      }// !onload
       
     </script>
     

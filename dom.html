@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>DOM</title>
+
+<script>
+window.onload=function(){
+	
+	var litag=document.createElement('li');
+		var litext=document.createTextNode('drittes');
+	var lastRemove;
+	
+	litag.appendChild(litext);
+	
+	
+	litag.onmouseover=function(){
+		document.getElementsByTagName('body')[0].style.border='10px solid fuchsia';			//überschreib ich mir mit der 2.onclick-function  --> onmouseover
+	}
+	
+	
+	//oder:
+	//var listitem=document.createElement('li');
+	//listitem.appendChild(document.createTextNode('teeeeext'));			//wird dareingeschossen und bleibt dort, müsst mir dann halt zum weiterarbeiten den firstchild vom li holen
+																										//insertBefore gibts aa.
+																										
+																										
+	//CLONE, oidah!
+	var liclone=litag.cloneNode(true); 		// ergo vorm eventhändler (s. Mitschrift)
+	
+	
+	document.getElementById('liste').appendChild(litag);
+	document.getElementById('liste').appendChild(liclone);
+	
+	
+	var listels=document.getElementById('liste').getElementsByTagName('li');
+	for(var i=0;i<listels.length;i++){
+		listels[i].onclick=function(){
+			//lastRemove=this.parentNode.removeChild(this);
+			
+			//console.log(lastRemove);
+			//console.log(this.onmouseover);					//gibt function oder null zurück
+			
+			if(typeof this.onmouseover=='function'){
+				console.log('original');
+			}
+				
+			//this.nextSibling.style.outline='3px solid red';    //next sibling ist der textnode ->2xnextSibling, funzt für die ersten, beim 1.dritten gehts mit 1x weil kein textnode dazwischen
+			//ergo:
+			
+			var nextEl;
+			if(this.nextSibling.nodeType==1){
+				nextEl=this.nextSibling;
+			}else{
+				nextEl=this.nextSibling.nextSibling;
+			}
+			nextEl.style.outline='3px solid red';
+		}
+		
+	}
+	
+	document.getElementById('liste').onclick=function(){
+		console.log(this.children);			//ned in älteren browsern
+		console.log(this.childNodes);
+	}
+	
+}
+</script>
+
+</head>
+<body>
+
+<ul id="liste">
+	<li>erstes</li>
+    <li>zweites</li>
+</ul>
+
+</body>
+</html>

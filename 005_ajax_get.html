@@ -7,34 +7,54 @@
 
     
     <script>
+      
+      /* @var referenz zum XMLHttpRequestObject*/
       var xhr;
       
+      /**
+       * Erstellt den Request (auch für IE), öffnet die Verbindung, onreadystatechange
+       * wird die Funktion handleResponse() zugewiesen
+       */
       function httpRequest(){
+        
+        // entsprechend CMLHttpRequest oder ActiveXObject erstellen (wenn IE)
         if(window.XMLHttpRequest){
           xhr = new XMLHttpRequest();
         }else{
           xhr = new ActiveXObject('Microsoft.XMLHTTP');
         }
         
+        
         //console.log(xhr);
         
+        // onreadystatechange wird bei jeder Statusänderung aufgerufen 1-4
         xhr.onreadystatechange = handleResponse;
         
+        // Verbindung wird geöffnet - (method, target, async, user,password)
         xhr.open('GET','005_ajax.php', true);
         
+        // los geht's'
         xhr.send();
-        
-        
         
       }
       
+      
+      /**
+       * Diese Funktion wird bei jeder Statusänderung aufgerufen (onreadystatechange),
+       * bei Status "4" steht die Antwort des Servers mittels der Eigenschaft responseText
+       * zur verfügung!
+       * 
+       */
       function handleResponse(){
         
         console.log(xhr.readyState);
         
+        // Überprüfung ob readyState == 4 und Serverstatus == 200 (404 = file not found)
         if(xhr.readyState == 4 && xhr.status == 200){
           
+          // div#aktuell slektieren und responseText ausgeben
           document.getElementById('aktuell').innerHTML += xhr.responseText;
+          
           
           console.log(xhr.status);
           console.log(xhr.responseText);
@@ -46,7 +66,9 @@
       
       window.onload = function(){
         
+        // onclick auf link
         document.getElementById('hole').onclick = function(){
+          // request im Hintergrund starten soald auf den Link geklickt wurde.
           httpRequest();
         }
       }

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script>
+      
+      function emailcheck(EL){
+        
+        var request = new XMLHttpRequest();
+        
+        request.open('POST', '006_ajax_form_post.php?', true);
+        
+        request.onreadystatechange = function(){
+          
+          if(request.readyState == 1){
+            
+            EL.style.backgroundColor = 'yellow';
+            
+          }
+          
+          if(request.readyState ==4 && request.status == 200){
+            
+            if(request.responseText == 'true'){
+              EL.style.backgroundColor = 'green';
+            }else{
+              EL.style.backgroundColor = 'red';
+            }
+            
+          }
+          
+        }
+        
+        request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+      
+      var emailtext = encodeURIComponent(EL.value);
+      
+        request.send('email='+ emailtext + '&varname=value');
+      
+      }
+      
+      
+      window.onload =  function(){
+        
+        document.getElementById('email').onchange = function(){
+          
+          emailcheck(this);
+          
+        }
+        
+      };
+      
+      
+    </script>
+    
+  </head>
+
+  <body>
+    
+    <form>
+
+      <fieldset>
+        
+        <legend>Registrierung</legend>
+        
+        <div>
+         <label for="name">Name</label> <input type="text" name="name" id="name" />
+        </div>
+  
+        <div>
+         <label for="email">Email</label> <input type="text" name="email" id="email" />
+        </div>
+ 
+        <div>
+         <label for="pw">Passwort</label> <input type="text" name="pw" id="pw" />
+        </div>
+  
+        
+        <div>
+         <label for="pw2">Passwort</label> <input type="text" name="pw2" id="pw2" />
+        </div>
+        
+      </fieldset>
+      
+      <input type="submit" /> <input type="reset" />
+      
+    </form>
+
+  </body>
+</html>

@@ -9,7 +9,74 @@
       
       function parseXML(XML){
         
-        console.log(XML)
+        console.log(XML);
+        
+        document.getElementById('anmeldungen').innerHTML = '';
+        
+        var items = XML.getElementsByTagName('item');
+        
+        for(var i = 0; i < items.length; i++){
+          
+          var name = items[i].getElementsByTagName('name')[0].firstChild.nodeValue;
+          var email = items[i].getElementsByTagName('email')[0].firstChild.nodeValue;
+          
+          
+          //var zeile = '<tr><td>'+ name +'</td><td>'+ email +'</td></tr>';
+
+          
+          
+          
+          var tr = document.createElement('tr');
+          
+              tr.onmouseover= function(){
+                
+                this.style.backgroundColor = 'red';
+              }
+              
+              tr.onmouseout = function(){
+                this.style.backgroundColor = '';
+              }
+              
+              tr.onclick = function(){
+                
+                this.delxhr = new XMLHttpRequest();
+                
+                this.delxhr.open('POST','server/loeschscript.php', true);
+                
+                this.delxhr.that = this;
+                
+                
+                this.delxhr.onreadystatechange = function(){
+                  
+                  if(this.readyState == 4){
+                    this.that.parentNode.removeChild(this.that);
+                  }
+                  
+                }
+                
+            var email = this.getElementsByTagName('td')[1].innerHTML
+            
+            this.delxhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            this.delxhr.send('email='+email);
+                
+                
+                
+                
+                
+              }
+          
+          var td = document.createElement('td');
+              td.appendChild(document.createTextNode(name));
+              
+              tr.appendChild(td);
+              
+              td = document.createElement('td');
+              td.appendChild(document.createTextNode(email));
+              
+              tr.appendChild(td);
+              
+             document.getElementById('anmeldungen').appendChild(tr);
+        }
         
       }
       
@@ -33,7 +100,7 @@
               
               document.getElementById('info').innerHTML = '';
               
-              parseXML(request.responseXML.documentElement)
+              parseXML(request.responseXML.documentElement);
 
             }
           

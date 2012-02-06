@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script>
+      
+      function parseXML(XML){
+        
+        console.log(XML)
+        
+      }
+      
+      window.onload = function(){
+        
+        document.getElementById('aktualisieren').onclick = function(){
+          
+          var request = new XMLHttpRequest();
+          
+          request.open('GET','adressen.xml', true);
+          
+          request.onreadystatechange = function(){
+            
+            if(request.readyState ==1){
+              
+            document.getElementById('info').innerHTML = 'loading...'
+              
+            }
+            
+            if(request.readyState == 4 && request.status == 200){
+              
+              document.getElementById('info').innerHTML = '';
+              
+              parseXML(request.responseXML.documentElement)
+
+            }
+          
+          }
+          
+          request.send(null);
+        }
+        
+        
+      }
+      
+    </script>
+    
+  </head>
+
+  <body>
+    
+    <span id="info"></span>
+   
+    <table id ="anmeldungen">
+      
+    </table>
+    
+    <a href="#" id="aktualisieren">Aktualisieren</a>
+
+  </body>
+</html>

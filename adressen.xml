@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anmeldungen>
+  <item>
+    <name>Max Mustermann</name>
+    <email>Max@Mustermann.at</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+  
+  
+   <item>
+    <name >Franz-Xaver Gabler</name>
+    <email>Franz-Xaver@gabler.at</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+  
+  <item>
+    <name>John Doe</name>
+    <email>John@doe.at</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+  
+  
+  <item>
+    <name>Mr. Smith</name>
+    <email>mr@smith.at</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+  
+  <item>
+    <name>Joe Bloggs</name>
+    <email>Joe@bloggs.at</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+  
+  <item>
+    <name>Iwan Iwanowitsch</name>
+    <email>iwan@iwanowitsch</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+  
+  <item>
+    <name>Jan Kowalskí</name>
+    <email>jan@kowalski.at</email>
+    <update>2010-04-29 10:01:57</update>
+  </item>
+
+</anmeldungen>

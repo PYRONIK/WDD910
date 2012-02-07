@@ -6,125 +6,148 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <script>
-      
+      /**
+       * Verarbeitet den übertragenen XML-Code
+       * @param XML übertragener xml code
+       */
       function parseXML(XML){
-        
-        console.log(XML);
-        
+
+       //  console.log(XML);
+
         document.getElementById('anmeldungen').innerHTML = '';
-        
+
+        /* @var HTMLCollection items aus dem Adressbuch */
         var items = XML.getElementsByTagName('item');
-        
+
+
+        //  items iterieren, Felder name und email auf Variable legen, TRs und
+        //  TDs erstellen, befüllen, Eventhandler zuweisen und dem Table hinzufügen
+
         for(var i = 0; i < items.length; i++){
-          
+
           var name = items[i].getElementsByTagName('name')[0].firstChild.nodeValue;
           var email = items[i].getElementsByTagName('email')[0].firstChild.nodeValue;
-          
-          
+
+          // Einfacher weg, jedoch können so nur mit erheblichen Umständen  Events belegt werden:
           //var zeile = '<tr><td>'+ name +'</td><td>'+ email +'</td></tr>';
 
-          
-          
-          
+          // TR erstellen
           var tr = document.createElement('tr');
-          
-              tr.onmouseover= function(){
-                
-                this.style.backgroundColor = 'red';
-              }
-              
-              tr.onmouseout = function(){
-                this.style.backgroundColor = '';
-              }
-              
+              // mouseover auf TR legen
+              tr.onmouseover= function(){ this.style.backgroundColor = 'red'; }
+              // mouseout auf TR legen
+              tr.onmouseout = function(){ this.style.backgroundColor = ''; }
+
+              /**
+               * Wenn ein Element angeklickt wird, soll im Hintergrund ein Löschscript ausgeführt werden,
+               * welches in diesem Beispiel nicht existiert - bei positiver Antwort wird die Zeile aus der
+               * Tabelle gelöscht.
+               */
               tr.onclick = function(){
-                
+                // Request auf Element erstellen (damit sich mehrere Requests nicht in die Quere kommen können).
                 this.delxhr = new XMLHttpRequest();
-                
+                // Verbindung öffnen (Script existiert in diesem Beispiel nicht).
                 this.delxhr.open('POST','server/loeschscript.php', true);
-                
+
+                // this auf delxhr.that "sichern", damit innerhalb von onreadystatechange
+                // auf das geklickte TR-ELement zugegriffen werden kann um es zu löschen.
                 this.delxhr.that = this;
-                
-                
+
+
                 this.delxhr.onreadystatechange = function(){
-                  
+                  /**
+                   *  Wenn Antwort kommt (Eintrag erfolgreich gelöscht wurde), entfernen
+                   *  wir die TR aus der Liste - die TR ist auf delxht.that gespeichert
+                   *  somit können wir hir auf this.that zugreifen (this bezieht sich
+                   *  innerhalb von onreadystatechange auf das XMLHttpRequest-Object -> delxhr ).
+                   *
+                   *  Da das Script zum Löschen in der DB nicht existiert checken
+                   *  wir nur den readyState - wir würden Status 404 bekommen.
+                   */
                   if(this.readyState == 4){
+                    // TR löschen
                     this.that.parentNode.removeChild(this.that);
                   }
-                  
+
                 }
-                
-            var email = this.getElementsByTagName('td')[1].innerHTML
-            
-            this.delxhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            this.delxhr.send('email='+email);
-                
-                
-                
-                
-                
-              }
-          
+
+
+               // Emailadresse der geklickten TR holen, um sie per POST an den Server zu schicken
+                var email = this.getElementsByTagName('td')[1].innerHTML
+
+                // Header setzen um POST-Daten schicken zu können.
+                this.delxhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                // Variablenkette übergeben und abschicken.
+                this.delxhr.send('email='+email);
+
+              } // !onclick
+
+              // TD erstellen und name mit einem Text-Node einfügen.
           var td = document.createElement('td');
               td.appendChild(document.createTextNode(name));
-              
+
+              // TD der TR hinzufügen
               tr.appendChild(td);
-              
+
+              // 2. TD für email erstellen und der TR hinzufügen.
               td = document.createElement('td');
               td.appendChild(document.createTextNode(email));
-              
               tr.appendChild(td);
-              
+
+              // nachdem die TR mit den befüllten TD's und Eventhandler belegt wurde
+              // wird diese dem Table mit der id 'anmeldungen' hinzugefügt.
              document.getElementById('anmeldungen').appendChild(tr);
-        }
-        
-      }
-      
+        } // !for()
+
+      } // !parseXML()
+
+
       window.onload = function(){
-        
+
+        // Wenn auf 'aktualisieren' geklickt wird, soll das XML-File vom Server geholt
+        // werden und das Dokument mit der Funktion parseXML() verarbeitet werden.
         document.getElementById('aktualisieren').onclick = function(){
-          
+
+          // Request erstellen
           var request = new XMLHttpRequest();
-          
+          // Verbindung öffnen
           request.open('GET','adressen.xml', true);
-          
+
+          // Funktion bei Statusänderung ausführen
           request.onreadystatechange = function(){
-            
+
+            // bei readyState 1 geben wir dem User die Meldung, dass Daten geladen werden
             if(request.readyState ==1){
-              
-            document.getElementById('info').innerHTML = 'loading...'
-              
+              document.getElementById('info').innerHTML = 'loading...'
             }
-            
+
+            // bei readyState 4 und Serverstatus 200 ...
             if(request.readyState == 4 && request.status == 200){
-              
+
+              // Info wird wieder entfernt
               document.getElementById('info').innerHTML = '';
-              
+
+              // parseXML wird mit dem documentElement des XML-Files aufgerufen.
               parseXML(request.responseXML.documentElement);
 
-            }
-          
-          }
-          
+            } // !if
+
+          } // !onreadystatechange
+
+          // Request abschicken - null wird übergeben um Fehler in älteren Browsern zu vermeiden.
           request.send(null);
-        }
-        
-        
-      }
-      
+        } // !onclick
+
+      } // !window.onload
+
     </script>
-    
+
   </head>
 
   <body>
-    
     <span id="info"></span>
-   
-    <table id ="anmeldungen">
-      
-    </table>
-    
+    <table id ="anmeldungen"></table>
     <a href="#" id="aktualisieren">Aktualisieren</a>
-
   </body>
 </html>

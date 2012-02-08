@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <script src="jquery.1.7.1.min.js"></script>
+
+    
+    <script>
+      
+      $(document).ready(function(){
+        
+        $('ul li').click(function(){
+          //this.style.backgroundColor = 'red';
+          //$(this).css('background-color', 'red');
+          
+          $(this).hide('slow');
+          
+          $(this).parent().css('border', '3px solid red');
+          
+         
+        }).mouseover(function(){
+          
+          $(this).css({
+            'border': '1px solid green',
+            'background-color' : 'fuchsia'
+          })
+          
+        }).mouseout(function(){
+          
+           $(this).css({
+            'border': '0px solid green',
+            'background-color' : 'transparent'
+          })         
+          
+        })
+        
+        
+      }) // !$(document).ready();
+      
+      
+      
+    </script>
+ 
+  </head>
+
+  <body>
+    
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      
+    </ul>
+    
+    
+    <ul>
+      <li>11</li>
+      <li>22</li>
+      <li>33</li>
+      <li>44</li>
+      <li>55</li>
+      <li>66</li>
+      
+    </ul>    
+    
+
+  </body>
+</html>

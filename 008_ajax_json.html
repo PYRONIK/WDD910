@@ -7,30 +7,40 @@
 
     
     <script>
-      
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    
+    
+      window.onload= function(){
+        
+        var request = new XMLHttpRequest();
+        
+        request.open('GET', '008_ajax_json.php', true);
+        
+        request.onreadystatechange = function(){
+          
+          if(request.readyState == 4 && request.status ==200){
+            
+            var JSON = eval('(' + request.responseText + ')');
+            
+            
+            
+            for(var i = 0; i < JSON.length; i++){
+              console.log(JSON[i].name);
+            }
+            
+            
+            
+          }
+          
+        }
+        
+        request.send(null);
+        
+        
+        
+      }
 
       
-      var anmeldungen = [
-        {
-          name: '',
-          email: '',
-          update: ''
-        },
-        {
-          name: '',
-          email: '',
-          update: ''
-        },
-        {
-          name: '',
-          email: '',
-          update: ''
-        }
-      ]
-      
-      namevonperson1 = anmeldungen[1].name;
-      
-      updatevonperson0 = anmeldungen[0].update;
       
       
       

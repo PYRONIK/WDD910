@@ -1,0 +1,7 @@
+Hier ist die Highscore aus der Datenbank!
+
+1
+2
+3
+4
+5

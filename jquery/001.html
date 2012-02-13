@@ -20,6 +20,17 @@
           
           $(this).parent().css('border', '3px solid red');
           
+          
+          $(this).parent().animate({
+            borderWidth : "200px"
+          },
+          {
+            duration : '20000',
+            queue : true
+            
+          })
+          
+         
          
         }).mouseover(function(){
           
@@ -35,7 +46,25 @@
             'background-color' : 'transparent'
           })         
           
+        }) // !mouseout();
+        
+        
+        
+        //$('ul li:first').css('background-color', 'red');
+        
+        
+        $('ul').each(function(I,EL){
+          
+          $('li:first',EL).css('background-color', 'red')
+          
+          alert(I);
         })
+        
+        
+        
+        
+        
+        
         
         
       }) // !$(document).ready();

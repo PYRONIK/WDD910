@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <script src="jquery.1.7.1.min.js"></script>
+    <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>
+    
+    
+    <script>
+      
+      
+      $(document).ready(function(){
+        
+        
+        	$(".scrollable").scrollable({
+            
+            onSeek : function(param){
+              
+              console.log(param);
+              console.log(this);
+              
+              console.log();
+              
+              $('#paginierung').html((this.getIndex()+1) +' /' + this.getItems().length);
+            }
+            
+
+            
+          });
+
+      var api = $(".scrollable").data("scrollable");
+        
+         $('#paginierung').html((api.getIndex()+1) +' /' + api.getItems().length);
+        
+      })
+      
+    </script>
+
+    
+    <style>
+      
+      
+      /*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+.scrollable {
+
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+	width: 660px;
+	height:90px;
+}
+
+/*
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a extremely large width to accommodate scrollable items.
+	it's enough that you set width and height for the root element and
+	not for this element.
+*/
+.scrollable .items {
+	/* this cannot be too large */
+	width:20000em;
+	position:absolute;
+}
+
+/*
+	a single item. must be floated in horizontal scrolling.
+	typically, this element is the one that *you* will style
+	the most.
+*/
+.items div {
+	float:left;
+}
+      
+    </style>
+  </head>
+
+  <body>
+
+    <!-- "previous page" action -->
+<a class="prev browse left">LEFT</a>
+
+<!-- root element for scrollable -->
+<div class="scrollable">   
+   
+   <!-- root element for the items -->
+   <div class="items">
+   
+      <!-- 1-5 -->
+      <div>
+         <img src="http://farm1.static.flickr.com/143/321464099_a7cfcb95cf_t.jpg" />
+         <img src="http://farm4.static.flickr.com/3089/2796719087_c3ee89a730_t.jpg" />
+         <img src="http://farm1.static.flickr.com/79/244441862_08ec9b6b49_t.jpg" />
+         <img src="http://farm1.static.flickr.com/28/66523124_b468cf4978_t.jpg" />
+         <img src="http://farm1.static.flickr.com/164/399223606_b875ddf797_t.jpg" />
+      </div>
+      
+      <!-- 5-10 -->
+      <div>
+         <img src="http://farm1.static.flickr.com/163/399223609_db47d35b7c_t.jpg" />
+         <img src="http://farm1.static.flickr.com/135/321464104_c010dbf34c_t.jpg" />
+         <img src="http://farm1.static.flickr.com/40/117346184_9760f3aabc_t.jpg" />
+         <img src="http://farm1.static.flickr.com/153/399232237_6928a527c1_t.jpg" />
+         <img src="http://farm1.static.flickr.com/50/117346182_1fded507fa_t.jpg" />
+      </div>
+      
+      <!-- 10-15 -->
+      <div>
+         <img src="http://farm4.static.flickr.com/3629/3323896446_3b87a8bf75_t.jpg" />
+         <img src="http://farm4.static.flickr.com/3023/3323897466_e61624f6de_t.jpg" />
+         <img src="http://farm4.static.flickr.com/3650/3323058611_d35c894fab_t.jpg" />
+         <img src="http://farm4.static.flickr.com/3635/3323893254_3183671257_t.jpg" />
+         <img src="http://farm4.static.flickr.com/3624/3323893148_8318838fbd_t.jpg" />
+      </div>
+      
+   </div>
+   
+</div>
+
+<!-- "next page" action -->
+<a class="next browse right">RIGHT</a>
+    
+
+<div id="paginierung"></div>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        
+        // Klasse Game
+        var Game = function(){
+          
+          this.player = [];
+          
+          var stage = $('body').append($('<div></div>'));
+          
+          $(stage).css({
+            width : '80%',
+            height: '80%',
+            backgroundColor : 'grey'
+          })
+          
+          // Methode um einen Player zu erstellen
+          this.createPlayer = function(config){            
+            this.player.push(new Player(config));
+          }
+          
+        }
+        
+        // Klasse Player
+        var Player = function(config){
+          
+          var LEFT = config.left,
+              RIGHT = config.right,
+              COLOR = config.color;
+          
+          
+          this.htmlelement = $('<div></div>').appendTo($('body > div'));
+          
+          $(this.htmlelement).css({
+            position : 'absolute',
+            left : '0px',
+            top : '0px',
+            height : '50px',
+            width : '50px',
+            backgroundColor : COLOR
+          });
+          
+          
+        
+        var that = this;
+          
+        $(document).keydown(function(event){
+          console.log(event.keyCode);
+          
+          if(event.keyCode == LEFT) that.moveLeft();
+          if(event.keyCode == RIGHT) that.moveRight();
+          
+        })
+          
+          
+          this.moveLeft = function(){
+            $(this.htmlelement).css('left', parseInt($(this.htmlelement).css('left')) - 10 + 'px' );
+          }
+          
+          this.moveRight = function(){
+            $(this.htmlelement).css('left', parseInt($(this.htmlelement).css('left')) + 10 + 'px' );
+          }
+          
+        }
+
+
+        // Game-Instanz bilden
+        var mygame = new Game();
+        mygame.createPlayer({
+          left: 37,
+          right: 39,
+          color: 'blue'
+        });
+
+
+        mygame.createPlayer({
+          left: 65,
+          right: 68,
+          color: 'red'
+        });
+
+      })
+    </script>
+    
+  </head>
+
+  <body>
+  </body>
+</html>

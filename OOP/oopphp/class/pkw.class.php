@@ -13,17 +13,21 @@ abstract class pkw implements tuev {
 	 
 	}
 
-
+	// hupen() ist final und darf von erbenden Klassen (z.b. Sportwagen)
+	// nicht überschrieben werden.
 	final public function hupen($lautstaerke, $hupton){
 	
 	}
 
+
+	// quietschen() darf auch innerhalb erbenden Klassen aufgerufen werden jedoch nicht von ausserhalb.
 	protected function quietschen(){
 	
 	 echo "iiiiiiiiiiiii";
 	}
 
 	// abstract public function licht();
+
 
 	public function bremsen($wert){
 		echo "ich bremse";

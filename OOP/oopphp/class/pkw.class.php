@@ -1,6 +1,6 @@
 <?php
 
-abstract class pkw {
+abstract class pkw implements tuev {
 	// Eigenschaft farbe	
 	private $farbe = 'rot';
 
@@ -13,19 +13,24 @@ abstract class pkw {
 	 
 	}
 
+
+	final public function hupen($lautstaerke, $hupton){
+	
+	}
+
 	protected function quietschen(){
 	
 	 echo "iiiiiiiiiiiii";
 	}
 
-	abstract public function licht();
+	// abstract public function licht();
 
 	public function bremsen($wert){
 		echo "ich bremse";
 		return $this;
 	}
 
-	public function lenken(){
+	final public function lenken(){
 		echo "ich lenke";
 		return $this;
 	}

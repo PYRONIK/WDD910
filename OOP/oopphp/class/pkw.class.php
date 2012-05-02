@@ -1,6 +1,6 @@
 <?php
 
-class pkw {
+abstract class pkw {
 	// Eigenschaft farbe	
 	private $farbe = 'rot';
 
@@ -13,12 +13,21 @@ class pkw {
 	 
 	}
 
-	public function bremsen(){
+	protected function quietschen(){
+	
+	 echo "iiiiiiiiiiiii";
+	}
+
+	abstract public function licht();
+
+	public function bremsen($wert){
 		echo "ich bremse";
+		return $this;
 	}
 
 	public function lenken(){
 		echo "ich lenke";
+		return $this;
 	}
 
 	// gibt die Farbe des pkw's zurück.

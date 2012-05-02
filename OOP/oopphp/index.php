@@ -12,18 +12,20 @@ function __autoload($class){
 }
 
 // neuen roten pkw erstellen
-$myauto =  new pkw('blau');
+$myauto =  new sportwagen('blau');
 
 // Sportwagen-Instanz bilden
 $myauto2 = new sportwagen('rot');
 
 
 // pkw bremst
-$myauto -> bremsen();
+echo $myauto -> bremsen(90) -> lenken()
+   		-> bremsen(15) -> bremsen(1)
+		-> lenken()->getFarbe();
 
 echo "<hr />";
 
 // sportwagen bremst
-$myauto2 ->bremsen();
+$myauto2 ->bremsen()->lenken();
 ?>
 

@@ -22,6 +22,9 @@ class user{
 
 
 		if( isset( $_SESSION['username'] ) && isset( $_SESSION['password'] ) && isset( $_SESSION['group'] )){
+
+			$this->_setUsername($_SESSION['username'],$_SESSION['password'], false);
+			return $this->_checkUser();
 		
 		}else{
 			$this->_setUsername(false,false,false);
@@ -29,21 +32,38 @@ class user{
 	}
 
 	public function login($username, $password){
-		echo $username . $password;
+		$this->_setUsername($username, $password, false);
+		$this->_checkUser();
+			
 	}
 
 	private function _checkUser(){
+
+
+		echo "<h1>CHECKUSER</h1>";
+		var_dump($this);
+
 	
 	}
 
 	private function _setUsername($username, $password, $group){
-	
+
+		$_SESSION['username'] = $this->_username = $username;
+		$_SESSION['password'] = $this->_password = $password;
+		$_SESSION['group'] = $this->_group = $group;
 	}
 
-	public function logout(){}
+	public function logout(){
+		$this->_setUsername(false,false,false);
+	}
 
-	public function getUsername(){}
-	public function getUserGroup(){}
+	public function getUsername(){
+		return $this->_username;
+	}
+
+	public function getUserGroup(){
+		return $this->_group;
+	}
 
 
 }

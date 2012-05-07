@@ -9,7 +9,22 @@ class user{
 
 	private $_dbConnection;
 
-	public function login(){}
+	public function __construct(){
+	
+	}
+
+	public function login($username, $password){
+	
+	}
+
+	private function _checkUser(){
+	
+	}
+
+	private function _setUsername($username, $password, $group){
+	
+	}
+
 	public function logout(){}
 
 	public function getUsername(){}

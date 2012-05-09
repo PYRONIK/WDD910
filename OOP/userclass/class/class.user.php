@@ -7,7 +7,7 @@ class user{
 
 	private $_group;
 
-	private $_dbConnection;
+	private $_db;
 
 	public function __construct(){
 		// login
@@ -37,14 +37,35 @@ class user{
 			
 	}
 
-	private function _checkUser(){
+    private function _checkUser(){
+        // mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+        $this->_db = new mysqli('localhost', 'saelogin', '', 'saelogin');
+
+        $result = $this->_db->query('SELECT * FROM user where username = "'. $this->_username . '"');
+
+        $result = $result->fetch_assoc();
+
+        if($result){
+            // user existiert
+            if($result['password'] === md5($this->_password) ){
+                // LOGIN OK
+                $this->_setUsername($result['username'], $this->_password, $result['group']);
+
+            }else{
+                // PASSWORT FALSCH
+                $this->_setUsername(false,false,false);
+            }
+
+        }else{
+            // user existiert nicht
+            $this->_setUsername(false,false,false);
+        }
+    
+    
+    }
 
 
-		echo "<h1>CHECKUSER</h1>";
-		var_dump($this);
 
-	
-	}
 
 	private function _setUsername($username, $password, $group){
 
@@ -64,8 +85,5 @@ class user{
 	public function getUserGroup(){
 		return $this->_group;
 	}
-
-
 }
-
 ?>

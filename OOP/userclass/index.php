@@ -16,6 +16,17 @@ $user = new User();
 <h1>class.user.php</h1>
 
 
+<?php
+
+if($user->getUserGroup === 'admin'){
+echo "<h1>Administration</h1>";
+}
+
+?>
+
+
+<?php if(!$user->getUserGroup()){ ?>
+
 <h2>Login</h2>
 
 <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
@@ -26,12 +37,14 @@ $user = new User();
 	<input type="submit" />
 </form>
 
+<?php }else { ?>
 
 
 
 <h2>Logout</h2>
 <a href="<?= $_SERVER['PHP_SELF'] ?>?logout">logoutbutton</a>
 
+<?php } ?>
 
 <h2>Username</h2>
 <?php var_dump($user->getUsername()); ?>

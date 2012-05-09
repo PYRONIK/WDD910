@@ -18,7 +18,7 @@ $user = new User();
 
 <?php
 
-if($user->getUserGroup === 'admin'){
+if($user->getUserGroup() === 'admin'){
 echo "<h1>Administration</h1>";
 }
 
